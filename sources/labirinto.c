@@ -2,7 +2,8 @@
 
 void LeituraArquivo(TipoApontador labirinto) {
     FILE *arq;
-    arq = fopen("../arquivos/arquivo1.txt", "r");
+    arq = fopen("./arquivos/arquivo1.txt", "r");
+
     if (arq == NULL) {
         printf("Erro ao abrir o arquivo\n");
         exit(1);
