@@ -79,9 +79,23 @@ void PosicaoEstudante(TipoApontador *lab, int *posX, int *posY) {
             }
         }
     }
-
-	printf("%d %d\n", *posX, *posY);
 }
 
 void MovimentaEstudante(TipoApontador *lab) {
+    int x0, y0;  // Posição inicial
+
+    PosicaoEstudante(lab, &x0, &y0);
+
+    if (VerificaMatriz(lab, x0, y0)) {
+        
+    }
+
+    printf("%d %d\n", x0, y0);
+}
+
+int VerificaMatriz(TipoApontador *lab, int linha, int coluna) {
+    if (linha >= 0 || linha < (*lab)->qtdLinhas && coluna >= 0 || coluna < (*lab)->qtdColunas) {
+        printf("Está dentro da matriz\n");
+
+    }
 }

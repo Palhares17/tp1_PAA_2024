@@ -2,11 +2,11 @@
 
 int main() {
     TipoApontador labirinto;
-	int x, y;
+    int x, y;
 
     LeituraArquivo(&labirinto);
-	MostrarLabirinto(&labirinto);
+    MostrarLabirinto(&labirinto);
 
-	PosicaoEstudante(&labirinto, &x, &y);
+    MovimentaEstudante(&labirinto);
     return 0;
 }
