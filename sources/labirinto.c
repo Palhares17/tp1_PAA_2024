@@ -29,13 +29,21 @@ void LeituraArquivo(TipoApontador *lab) {
 
     inicializaLabirinto(&(*lab), linhas, colunas, chaves);
 
-    int entrada;
+    char entrada[(*lab)->qtdColunas + 1];
 
-    for (int i = 0; i < ((*lab)->qtdLinhas); i++) {
-        fscanf(arq, "%d", &entrada);
-        printf("valor = %d ", entrada);
+    for (int i = 0; i < (*lab)->qtdLinhas; i++) {
+        if (fscanf(arq, "%s", entrada) != 1) {
+            printf("Erro ao ler a linha %d do labirinto\n", i);
+            fclose(arq);
+            exit(1);
+        }
 
-        printf("\n");
+        // Converte os caracteres da string para inteiros
+        for (int j = 0; j < (*lab)->qtdColunas; j++) {
+            (*lab)->labirinto[i][j] = entrada[j] - '0';
+			printf("%d ", (*lab)->labirinto[i][j]);
+        }
+		printf("\n");
     }
 
     fclose(arq);
