@@ -37,10 +37,36 @@ void LeituraArquivo(TipoApontador *lab) {
         // Converte os caracteres da string para inteiros
         for (int j = 0; j < (*lab)->qtdColunas; j++) {
             (*lab)->labirinto[i][j] = entrada[j] - '0';
-            printf("%d ", (*lab)->labirinto[i][j]);
         }
-        printf("\n");
     }
 
     fclose(arq);
 }
+
+void MostrarLabirinto(TipoApontador *lab) {
+    for (int i = 0; i < (*lab)->qtdLinhas; i++) {
+        for (int j = 0; j < (*lab)->qtdColunas; j++) {
+            if ((*lab)->labirinto[i][j] == 0) printf(
+                "\e[0;32m" // background verde
+                "%d \e[0m",
+                (*lab)->labirinto[i][j]);
+
+            if ((*lab)->labirinto[i][j] == 1) printf(
+                "\e[0;107m" // background branco
+                "%d \e[0m",
+                (*lab)->labirinto[i][j]);
+
+            if ((*lab)->labirinto[i][j] == 2) printf(
+                "\e[0;104m" // background azul
+                "%d \e[0m",
+                (*lab)->labirinto[i][j]);
+
+            if ((*lab)->labirinto[i][j] == 3) printf(
+                "\e[0;101m" // background vermelho
+                "%d \e[0m",
+                (*lab)->labirinto[i][j]);
+        }
+        printf("\n");
+    }
+}
+
