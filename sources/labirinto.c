@@ -10,8 +10,6 @@ void inicializaLabirinto(TipoApontador *lab, int linha, int coluna, int chave) {
     for (int i = 0; i < (*lab)->qtdLinhas; i++) {
         (*lab)->labirinto[i] = (int *)calloc(((*lab)->qtdColunas + 1), sizeof(int));
     }
-
-    return;
 }
 
 void LeituraArquivo(TipoApontador *lab) {
@@ -20,7 +18,6 @@ void LeituraArquivo(TipoApontador *lab) {
 
     if (arq == NULL) {
         printf("Erro ao abrir o arquivo\n");
-        exit(1);
     }
 
     int linhas, colunas, chaves;
@@ -35,7 +32,6 @@ void LeituraArquivo(TipoApontador *lab) {
         if (fscanf(arq, "%s", entrada) != 1) {
             printf("Erro ao ler a linha %d do labirinto\n", i);
             fclose(arq);
-            exit(1);
         }
 
         // Converte os caracteres da string para inteiros
