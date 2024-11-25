@@ -3,6 +3,6 @@
 int main() {
     TipoApontador labirinto;
 
-    LeituraArquivo(labirinto);
+    LeituraArquivo(&labirinto);
     return 0;
 }

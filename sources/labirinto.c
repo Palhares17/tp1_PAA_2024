@@ -1,6 +1,20 @@
 #include "../headers/includes.h"
 
-void LeituraArquivo(TipoApontador labirinto) {
+void inicializaLabirinto(TipoApontador *lab, int linha, int coluna, int chave) {
+    (*lab)->qtdLinhas = linha;
+    (*lab)->qtdColunas = coluna;
+    (*lab)->qtdChaves = chave;
+
+    (*lab)->labirinto = (int **)calloc(((*lab)->qtdLinhas + 1), sizeof(int *));
+
+    for (int i = 0; i < (*lab)->qtdLinhas; i++) {
+        (*lab)->labirinto[i] = (int *)calloc(((*lab)->qtdColunas + 1), sizeof(int));
+    }
+
+    return;
+}
+
+void LeituraArquivo(TipoApontador *lab) {
     FILE *arq;
     arq = fopen("./arquivos/arquivo1.txt", "r");
 
@@ -13,7 +27,16 @@ void LeituraArquivo(TipoApontador labirinto) {
 
     fscanf(arq, "%d %d %d", &linhas, &colunas, &chaves);
 
-    printf("linhas: %d\n", linhas);
+    inicializaLabirinto(&(*lab), linhas, colunas, chaves);
+
+    int entrada;
+
+    for (int i = 0; i < ((*lab)->qtdLinhas); i++) {
+        fscanf(arq, "%d", &entrada);
+        printf("valor = %d ", entrada);
+
+        printf("\n");
+    }
 
     fclose(arq);
 }
