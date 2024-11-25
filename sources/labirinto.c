@@ -41,9 +41,9 @@ void LeituraArquivo(TipoApontador *lab) {
         // Converte os caracteres da string para inteiros
         for (int j = 0; j < (*lab)->qtdColunas; j++) {
             (*lab)->labirinto[i][j] = entrada[j] - '0';
-			printf("%d ", (*lab)->labirinto[i][j]);
+            printf("%d ", (*lab)->labirinto[i][j]);
         }
-		printf("\n");
+        printf("\n");
     }
 
     fclose(arq);
