@@ -1,6 +1,6 @@
 - Trabalho:
 [x] Leitura de arquivo.
-[ ] Criar entrada de arquivos.
+[x] Criar entrada de arquivos.
 [x] Criar labirinto e gerar matriz.
 [x] Fazer movimentação do estudante (backtraking).
 [x] Criar o modo Análise.
