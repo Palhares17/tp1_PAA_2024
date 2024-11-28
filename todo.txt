@@ -1,12 +1,14 @@
 - Trabalho:
-[x] Leitura de arquivo
-[x] Criar labirinto e gerar matriz
-[x] Fazer movimentação do estudante (backtraking)
-[ ] Criar o modo Análise
-[ ] Criar formato de saída
-[ ] Criar menu
+[x] Leitura de arquivo.
+[ ] Criar entrada de arquivos.
+[x] Criar labirinto e gerar matriz.
+[x] Fazer movimentação do estudante (backtraking).
+[x] Criar o modo Análise.
+[ ] Criar formato de saída.
+[ ] Criar menu.
 
 - Extras:
 [ ] Criar algoritmo de geração de labirinto de teste.
-[ ] Permitir que o estudante pegue chaves (4).
+[x] Permitir que o estudante pegue chaves (4).
+[ ] Não entendi o item 4.
 [ ] Plotar um gráfico de complexidade (complexidade x tempo).

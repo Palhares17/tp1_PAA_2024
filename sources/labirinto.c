@@ -1,5 +1,8 @@
 #include "../headers/includes.h"
 
+int chamadasRecursivas = 0;        // Contador de chamadas recursivas
+int nivelMaximoRecursividade = 0;  // Nível máximo de recursividade
+
 void inicializaLabirinto(TipoApontador *lab, int linha, int coluna, int chave) {
     (*lab)->qtdLinhas = linha;
     (*lab)->qtdColunas = coluna;
@@ -12,67 +15,45 @@ void inicializaLabirinto(TipoApontador *lab, int linha, int coluna, int chave) {
     }
 }
 
-void LeituraArquivo(TipoApontador *lab) {
-    FILE *arq;
-    arq = fopen("./arquivos/arquivo2.txt", "r");
-
-    if (arq == NULL) {
-        printf("Erro ao abrir o arquivo\n");
-    }
-
-    int linhas, colunas, chaves;
-
-    fscanf(arq, "%d %d %d", &linhas, &colunas, &chaves);
-
-    inicializaLabirinto(&(*lab), linhas, colunas, chaves);
-
-    char entrada[(*lab)->qtdColunas + 1];
-
-    for (int i = 0; i < (*lab)->qtdLinhas; i++) {
-        if (fscanf(arq, "%s", entrada) != 1) {
-            printf("Erro ao ler a linha %d do labirinto\n", i);
-            fclose(arq);
-        }
-
-        // Converte os caracteres da string para inteiros
-        for (int j = 0; j < (*lab)->qtdColunas; j++) {
-            (*lab)->labirinto[i][j] = entrada[j] - '0';
-        }
-    }
-
-    fclose(arq);
-}
-
 void MostrarLabirinto(TipoApontador *lab) {
     for (int i = 0; i < (*lab)->qtdLinhas; i++) {
         for (int j = 0; j < (*lab)->qtdColunas; j++) {
-            if ((*lab)->labirinto[i][j] == 0) printf(
-                "\e[0;32m"  // background verde
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
+            if ((*lab)->labirinto[i][j] == 0)
+                printf(
+                    "\e[0;32m"  // background verde
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
 
-            if ((*lab)->labirinto[i][j] == 1) printf(
-                "\e[0;107m"  // background branco
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 1)
+                printf(
+                    "\e[0;107m"  // background branco
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
 
-            if ((*lab)->labirinto[i][j] == 2) printf(
-                "\e[0;104m"  // background azul
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 2)
+                printf(
+                    "\e[0;104m"  // background azul
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
 
-            if ((*lab)->labirinto[i][j] == 3) printf(
-                "\e[0;101m"  // background vermelho
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
-            if ((*lab)->labirinto[i][j] == 4) printf(
-                "\e[43m"     // background amarelo
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
-            if ((*lab)->labirinto[i][j] == 5) printf(
-                "\e[45m"     // background roxo
-                "%d \e[0m",
-                (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 3)
+                printf(
+                    "\e[0;101m"  // background vermelho
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 4)
+                printf(
+                    "\e[43m"  // background amarelo
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 5)
+                printf(
+                    "\e[45m"  // background rosa
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
+            else {
+                printf("%d", (*lab)->labirinto[i][j]);
+            }
         }
         printf("\n");
     }
@@ -99,22 +80,36 @@ void MovimentaEstudante(TipoApontador *lab) {
     getPosicaoEstudante(lab, &x0, &y0);
 
     // Chama a função recursiva
-    if (backtracking(lab, x0, y0, &movimentos)) {
+    if (backtracking(lab, x0, y0, &movimentos, 1)) {
         printf("O estudante se movimentou %d vezes e chegou na linha 0.\n", movimentos);
     } else {
         printf("O estudante se movimentou %d vezes e percebeu que o labirinto nao tem saida.\n", movimentos);
     }
+
+    if (MOD_ANALISE) {
+        printf("\n=== MODO ANÁLISE ===\n");
+        printf("Chamadas recursivas: %d\n", chamadasRecursivas);
+        printf("Nível máximo de recursividade: %d\n", nivelMaximoRecursividade);
+        printf("====================\n");
+    }
 }
 
-int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos) {
-    MostrarLabirinto(lab);
+int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos, int nivelAtual) {
+    ImprimirSaidas(lab, linha, coluna);
+
+    if (MOD_ANALISE) {
+        chamadasRecursivas++;  // Incrementa o número de chamadas recursivas
+        if (nivelAtual > nivelMaximoRecursividade) {
+            nivelMaximoRecursividade = nivelAtual;  // Atualiza o nível máximo
+        }
+    }
+
     // Movimentos: cima, baixo, esquerda, direita
     int movLinha[] = {-1, 1, 0, 0};
     int movColuna[] = {0, 0, -1, 1};
 
     // Se chegou na linha 0, o estudante venceu
     if (linha == 0) {
-        printf("Linha: %d Coluna: %d\n", linha, coluna);
         return 1;
     }
 
@@ -122,11 +117,8 @@ int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos) {
         if ((*lab)->labirinto[linha][coluna] == 3) {
             (*lab)->labirinto[linha][coluna] = 3;
 
-        } else if ((*lab)->labirinto[linha][coluna] == 0) {
-            (*lab)->labirinto[linha][coluna] = 0;
-
         } else {
-            (*lab)->labirinto[linha][coluna] = 5;
+            (*lab)->labirinto[linha][coluna] = 5;  // Marca a posição que permite a passagem
         }
     }
 
@@ -138,10 +130,9 @@ int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos) {
         // Verifica se é possível avançar
         if (VerificaMatriz(lab, novaLinha, novaColuna)) {
             (*movimentos)++;
-            if (backtracking(lab, novaLinha, novaColuna, movimentos)) {
+            if (backtracking(lab, novaLinha, novaColuna, movimentos, nivelAtual + 1)) {
                 return 1;
             }
-            (*movimentos)--;
         }
     }
 
@@ -158,6 +149,9 @@ int VerificaMatriz(TipoApontador *lab, int linha, int coluna) {
             return 1;
         } else if ((*lab)->labirinto[linha][coluna] == 3 && (*lab)->qtdChaves > 0) {
             (*lab)->qtdChaves--;
+            return 1;
+        } else if ((*lab)->labirinto[linha][coluna] == 4) {  // Pega chave
+            (*lab)->qtdChaves++;
             return 1;
         }
     }

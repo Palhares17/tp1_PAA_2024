@@ -4,9 +4,7 @@ int main() {
     TipoApontador labirinto;
     int x, y;
 
-    LeituraArquivo(&labirinto);
-
-    MovimentaEstudante(&labirinto);
+    if (LeituraArquivo(&labirinto)) MovimentaEstudante(&labirinto);   
 
     return 0;
 }
