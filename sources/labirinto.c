@@ -14,7 +14,7 @@ void inicializaLabirinto(TipoApontador *lab, int linha, int coluna, int chave) {
 
 void LeituraArquivo(TipoApontador *lab) {
     FILE *arq;
-    arq = fopen("./arquivos/arquivo1.txt", "r");
+    arq = fopen("./arquivos/arquivo2.txt", "r");
 
     if (arq == NULL) {
         printf("Erro ao abrir o arquivo\n");
@@ -65,8 +65,12 @@ void MostrarLabirinto(TipoApontador *lab) {
                 "\e[0;101m"  // background vermelho
                 "%d \e[0m",
                 (*lab)->labirinto[i][j]);
+            if ((*lab)->labirinto[i][j] == 4) printf(
+                "\e[43m"     // background amarelo
+                "%d \e[0m",
+                (*lab)->labirinto[i][j]);
             if ((*lab)->labirinto[i][j] == 5) printf(
-                "\e[45m"  // background vermelho
+                "\e[45m"     // background roxo
                 "%d \e[0m",
                 (*lab)->labirinto[i][j]);
         }
@@ -88,8 +92,8 @@ void getPosicaoEstudante(TipoApontador *lab, int *posX, int *posY) {
 }
 
 void MovimentaEstudante(TipoApontador *lab) {
-    int x0, y0;          
-    int movimentos = 0;  
+    int x0, y0;
+    int movimentos = 0;
 
     // Pega a posição inicial do estudante
     getPosicaoEstudante(lab, &x0, &y0);

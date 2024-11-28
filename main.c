@@ -6,11 +6,7 @@ int main() {
 
     LeituraArquivo(&labirinto);
 
-    MostrarLabirinto(&labirinto);
-
     MovimentaEstudante(&labirinto);
-
-    MostrarLabirinto(&labirinto);
 
     return 0;
 }
