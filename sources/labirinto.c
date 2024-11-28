@@ -88,8 +88,8 @@ void getPosicaoEstudante(TipoApontador *lab, int *posX, int *posY) {
 }
 
 void MovimentaEstudante(TipoApontador *lab) {
-    int x0, y0;          // Posição inicial
-    int movimentos = 0;  // Contador de movimentos
+    int x0, y0;          
+    int movimentos = 0;  
 
     // Pega a posição inicial do estudante
     getPosicaoEstudante(lab, &x0, &y0);
@@ -111,7 +111,7 @@ int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos) {
     // Se chegou na linha 0, o estudante venceu
     if (linha == 0) {
         printf("Linha: %d Coluna: %d\n", linha, coluna);
-        return 1;  // Sucesso
+        return 1;
     }
 
     if (VerificaMatriz(lab, linha, coluna)) {
@@ -133,17 +133,17 @@ int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos) {
 
         // Verifica se é possível avançar
         if (VerificaMatriz(lab, novaLinha, novaColuna)) {
-            (*movimentos)++;  // Incrementa o número de movimentos
+            (*movimentos)++;
             if (backtracking(lab, novaLinha, novaColuna, movimentos)) {
-                return 1;  // Sucesso
+                return 1;
             }
-            (*movimentos)--;  // Retrocede
+            (*movimentos)--;
         }
     }
 
     // Desmarca a posição antes de retornar
     (*lab)->labirinto[linha][coluna] = 1;
-    return 0;  // Caminho sem sucesso
+    return 0;
 }
 
 int VerificaMatriz(TipoApontador *lab, int linha, int coluna) {
@@ -151,11 +151,11 @@ int VerificaMatriz(TipoApontador *lab, int linha, int coluna) {
     if (linha >= 0 && linha < (*lab)->qtdLinhas && coluna >= 0 && coluna < (*lab)->qtdColunas) {
         // Verifica se a posição é acessível (1) ou uma porta (3) com chave
         if ((*lab)->labirinto[linha][coluna] == 1) {
-            return 1;  // Pode avançar
+            return 1;
         } else if ((*lab)->labirinto[linha][coluna] == 3 && (*lab)->qtdChaves > 0) {
-            (*lab)->qtdChaves--;  // Usa uma chave
-            return 1;             // Pode avançar
+            (*lab)->qtdChaves--;
+            return 1;
         }
     }
-    return 0;  // Não pode avançar
+    return 0;
 }
