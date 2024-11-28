@@ -5,8 +5,12 @@ int main() {
     int x, y;
 
     LeituraArquivo(&labirinto);
+
     MostrarLabirinto(&labirinto);
 
     MovimentaEstudante(&labirinto);
+
+    MostrarLabirinto(&labirinto);
+
     return 0;
 }
