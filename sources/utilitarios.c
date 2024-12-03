@@ -3,8 +3,8 @@
 int LeituraArquivo(TipoApontador *lab) {
     FILE *arq;
     char nomeArq[40];
-
-    printf("Escolha um arquivo de leitura? ");
+    limpaTela();
+    printf("Escolha um arquivo de leitura (Digite o nome do arquivo com .txt): ");
     scanf("%s", nomeArq);
 
     char caminhoArq[40] = "./arquivos/";
@@ -14,6 +14,7 @@ int LeituraArquivo(TipoApontador *lab) {
     arq = fopen(caminhoArq, "r");
 
     if (arq == NULL) {
+        limpaTela();
         printf("Erro ao abrir o arquivo\n");
         printf("Nao foi encontrado o arquivo %s\n", caminhoArq);
         return 0;
@@ -44,7 +45,14 @@ int LeituraArquivo(TipoApontador *lab) {
         return 1;
     }
 }
-
+void limpaTela()
+{
+#ifdef _WIN32  // Verifica se o sistema é Windows
+    system("cls");  // Limpa a tela no Windows
+#else
+    system("clear");  // Limpa a tela no Linux/Mac
+#endif
+}
 void ImprimirSaidas(TipoApontador *lab, int linha, int coluna) {
     printf("Linha: %d Coluna: %d\n", linha, coluna);
 

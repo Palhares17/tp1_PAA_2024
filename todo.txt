@@ -6,6 +6,7 @@
 [x] Criar o modo Análise.
 [x] Criar formato de saída.
 [x] Criar menu.
+[x] Fazer o limpa tela.
 
 - Extras:
 [x] Criar algoritmo de geração de labirinto de teste.

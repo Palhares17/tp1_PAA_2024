@@ -14,13 +14,14 @@ void gerarLabirinto() {
 
     char caminhoArq[40] = "./arquivos/";
     strcat(caminhoArq, nomeArq);
-
+    limpaTela();
     printf("\nDigite o numero de linhas, colunas e chaves do labirinto (Ex.: 5 5 2): ");
     scanf("%d %d %d", &linhas, &colunas, &chaves);
 
     FILE *arquivo = fopen(caminhoArq, "w");
 
     if (arquivo == NULL) {
+        limpaTela();
         printf("Erro ao criar o arquivo!\n");
         return;
     }
@@ -69,6 +70,6 @@ void gerarLabirinto() {
     free(labirinto);
 
     fclose(arquivo);
-
+    
     printf("Arquivo '%s' criado com sucesso com o labirinto gerado!\n", nomeArq);
 }

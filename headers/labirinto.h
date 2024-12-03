@@ -18,6 +18,8 @@ int VerificaMatriz(TipoApontador *lab, int linha, int coluna);
 
 void ImprimirSaidas(TipoApontador *lab, int linha, int coluna);
 
+void limpaTela();
+
 void gerarLabirinto();
 
 #endif
