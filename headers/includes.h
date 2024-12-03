@@ -5,6 +5,6 @@
 #include <string.h>
 #include <time.h>
 
-#define MOD_ANALISE 1  // Modo de análise
+// #define MOD_ANALISE  // Modo de análise
 
 #include "labirinto.h"

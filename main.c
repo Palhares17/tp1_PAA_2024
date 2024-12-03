@@ -4,14 +4,23 @@ int main() {
     TipoApontador labirinto;
     int x, y;
 
-    int menu;
-    printf("Gerar labirinto ou ler de arquivo? (1 - Gerar, 2 - Ler): ");
-    scanf("%d", &menu);
+    while(1) {
+        int menu;
+        printf("1)Gerar um novo arquivo de dados.\n2)Ler e exibir arquivo ja criado.\n3 ou qualquer outro caracter) Sair do programa.\nDigite um numero: ");
+        scanf("%d", &menu);
 
-    if (menu == 1) {
-        gerarLabirinto();
-    } else if (LeituraArquivo(&labirinto))
-        MovimentaEstudante(&labirinto);
+        if (menu == 1) {
+            gerarLabirinto();
+        
+        } else if (menu == 2){
+            if(LeituraArquivo(&labirinto))
+                MovimentaEstudante(&labirinto);
+        
+        } else{
+            break;
+        }    
+    }
+    
 
     return 0;
 }

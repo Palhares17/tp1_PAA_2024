@@ -15,7 +15,7 @@ int LeituraArquivo(TipoApontador *lab) {
 
     if (arq == NULL) {
         printf("Erro ao abrir o arquivo\n");
-        printf("Não foi encontrado o arquivo %s\n", caminhoArq);
+        printf("Nao foi encontrado o arquivo %s\n", caminhoArq);
         return 0;
 
     } else {
@@ -46,7 +46,7 @@ int LeituraArquivo(TipoApontador *lab) {
 }
 
 void ImprimirSaidas(TipoApontador *lab, int linha, int coluna) {
-    printf("%d %d\n", linha, coluna);
+    printf("Linha: %d Coluna: %d\n", linha, coluna);
 
     MostrarLabirinto(lab);
 }

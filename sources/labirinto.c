@@ -81,28 +81,28 @@ void MovimentaEstudante(TipoApontador *lab) {
 
     // Chama a função recursiva
     if (backtracking(lab, x0, y0, &movimentos, 1)) {
-        printf("O estudante se movimentou %d vezes e chegou na linha 0.\n", movimentos);
+        printf("O estudante se movimentou %d vezes e chegou na linha %d e coluna %d\n", movimentos, x0, y0);
     } else {
         printf("O estudante se movimentou %d vezes e percebeu que o labirinto nao tem saida.\n", movimentos);
     }
 
-    if (MOD_ANALISE) {
-        printf("\n=== MODO ANÁLISE ===\n");
+    #ifdef MOD_ANALISE
+        printf("\n=== MODO ANALISE ===\n");
         printf("Chamadas recursivas: %d\n", chamadasRecursivas);
-        printf("Nível máximo de recursividade: %d\n", nivelMaximoRecursividade);
+        printf("Nivel maximo de recursividade: %d\n", nivelMaximoRecursividade);
         printf("====================\n");
-    }
+     #endif
 }
 
 int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos, int nivelAtual) {
     ImprimirSaidas(lab, linha, coluna);
 
-    if (MOD_ANALISE) {
+    #ifdef MOD_ANALISE
         chamadasRecursivas++;  // Incrementa o número de chamadas recursivas
         if (nivelAtual > nivelMaximoRecursividade) {
             nivelMaximoRecursividade = nivelAtual;  // Atualiza o nível máximo
         }
-    }
+    #endif
 
     // Movimentos: cima, baixo, esquerda, direita
     int movLinha[] = {-1, 1, 0, 0};
