@@ -51,6 +51,11 @@ void MostrarLabirinto(TipoApontador *lab) {
                     "\e[45m"  // background rosa
                     "%d \e[0m",
                     (*lab)->labirinto[i][j]);
+            else if ((*lab)->labirinto[i][j] == 9)
+                printf(
+                    "\e[46m"  // background ciano
+                    "%d \e[0m",
+                    (*lab)->labirinto[i][j]);
             else {
                 printf("%d", (*lab)->labirinto[i][j]);
             }
@@ -86,23 +91,23 @@ void MovimentaEstudante(TipoApontador *lab) {
         printf("O estudante se movimentou %d vezes e percebeu que o labirinto nao tem saida.\n", movimentos);
     }
 
-    #ifdef MOD_ANALISE
-        printf("\n=== MODO ANALISE ===\n");
-        printf("Chamadas recursivas: %d\n", chamadasRecursivas);
-        printf("Nivel maximo de recursividade: %d\n", nivelMaximoRecursividade);
-        printf("====================\n");
-     #endif
+#ifdef MOD_ANALISE
+    printf("\n=== MODO ANALISE ===\n");
+    printf("Chamadas recursivas: %d\n", chamadasRecursivas);
+    printf("Nivel maximo de recursividade: %d\n", nivelMaximoRecursividade);
+    printf("====================\n");
+#endif
 }
 
 int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos, int nivelAtual) {
     ImprimirSaidas(lab, linha, coluna);
 
-    #ifdef MOD_ANALISE
-        chamadasRecursivas++;  // Incrementa o número de chamadas recursivas
-        if (nivelAtual > nivelMaximoRecursividade) {
-            nivelMaximoRecursividade = nivelAtual;  // Atualiza o nível máximo
-        }
-    #endif
+#ifdef MOD_ANALISE
+    chamadasRecursivas++;  // Incrementa o número de chamadas recursivas
+    if (nivelAtual > nivelMaximoRecursividade) {
+        nivelMaximoRecursividade = nivelAtual;  // Atualiza o nível máximo
+    }
+#endif
 
     // Movimentos: cima, baixo, esquerda, direita
     int movLinha[] = {-1, 1, 0, 0};
@@ -115,7 +120,7 @@ int backtracking(TipoApontador *lab, int linha, int coluna, int *movimentos, int
 
     if (VerificaMatriz(lab, linha, coluna)) {
         if ((*lab)->labirinto[linha][coluna] == 3) {
-            (*lab)->labirinto[linha][coluna] = 3;
+            (*lab)->labirinto[linha][coluna] = 3;  // Marca a porta aberta
 
         } else {
             (*lab)->labirinto[linha][coluna] = 5;  // Marca a posição que permite a passagem
@@ -145,9 +150,10 @@ int VerificaMatriz(TipoApontador *lab, int linha, int coluna) {
     // Verifica se a posição está dentro dos limites do labirinto
     if (linha >= 0 && linha < (*lab)->qtdLinhas && coluna >= 0 && coluna < (*lab)->qtdColunas) {
         // Verifica se a posição é acessível (1) ou uma porta (3) com chave
-        if ((*lab)->labirinto[linha][coluna] == 1) {
+        if ((*lab)->labirinto[linha][coluna] == 1 | (*lab)->labirinto[linha][coluna] == 9) {
             return 1;
         } else if ((*lab)->labirinto[linha][coluna] == 3 && (*lab)->qtdChaves > 0) {
+            (*lab)->labirinto[linha][coluna] = 9;  // Marca a porta aberta
             (*lab)->qtdChaves--;
             return 1;
         } else if ((*lab)->labirinto[linha][coluna] == 4) {  // Pega chave

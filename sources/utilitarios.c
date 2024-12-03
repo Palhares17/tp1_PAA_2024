@@ -40,21 +40,23 @@ int LeituraArquivo(TipoApontador *lab) {
             }
         }
 
-
         fclose(arq);
         return 1;
     }
 }
-void limpaTela()
-{
-#ifdef _WIN32  // Verifica se o sistema é Windows
+
+void limpaTela() {
+#ifdef _WIN32       // Verifica se o sistema é Windows
     system("cls");  // Limpa a tela no Windows
 #else
     system("clear");  // Limpa a tela no Linux/Mac
 #endif
 }
+
 void ImprimirSaidas(TipoApontador *lab, int linha, int coluna) {
+    printf("Posição atual:\n");
     printf("Linha: %d Coluna: %d\n", linha, coluna);
+    printf("\n====== Labirinto ======\n\n");
 
     MostrarLabirinto(lab);
 }

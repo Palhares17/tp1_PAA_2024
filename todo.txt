@@ -13,3 +13,12 @@
 [x] Permitir que o estudante pegue chaves (4).
 [ ] Não entendi o item 4.
 [ ] Plotar um gráfico de complexidade (complexidade x tempo).
+
+
+- Anotações:
+
+Percebi que, em determinados momentos, o labirinto não apresenta uma saída viável. Isso acontece porque o algoritmo não coleta a chave necessária antes de tentar abrir uma porta. Como o algoritmo segue uma estratégia de movimento prioritária, ele sempre tenta avançar para cima primeiro. Quando encontra uma porta e não possui uma chave, ele deveria buscar coletar a chave antes de tentar novamente subir, mas isso não ocorre.
+
+Não sei se esse seria o intuíto do trabalho já que para coletar as chaves seria necessário executar um backtraking para a coleta de chaves.
+
+Um exemplo claro desse comportamento pode ser observado no labirinto do arquivo "arquivo10.txt". Nesse caso, o algoritmo tenta subir, mas encontra uma porta que exige uma chave. Como ele não tem a chave no momento e não retorna para buscá-la em outra direção, acaba ficando sem saída, dependendo da posição inicial da chave.
