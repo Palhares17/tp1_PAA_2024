@@ -43,9 +43,8 @@ void gerarLabirinto() {
 
             } else if ((rand() % 10) < 1) {  // 10% de chance para `4`
                 labirinto[i][j] = 4;
-                
-            }
-            else {
+
+            } else {
                 labirinto[i][j] = (rand() % 10) < 7 ? 1 : 2;  // 70% para `1`, 30% para `2`
             }
         }
@@ -70,6 +69,6 @@ void gerarLabirinto() {
     free(labirinto);
 
     fclose(arquivo);
-    
+
     printf("Arquivo '%s' criado com sucesso com o labirinto gerado!\n", nomeArq);
 }
