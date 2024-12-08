@@ -4,11 +4,11 @@ int main() {
     TipoApontador labirinto;
     int x, y;
 
-    printf("\n\n========== Início da fuga ==========\n\n");
+    printf("\n\n========== Inicio da fuga ==========\n\n");
 
     while (1) {
         int menu;
-        printf("\n\nSelecione uma dessas opções:\n");
+        printf("\n\nSelecione uma dessas opcoes:\n");
         printf("------------------------------\n");
         printf(
             "(1) Gerar um novo arquivo de dados.\n\n"

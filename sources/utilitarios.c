@@ -54,7 +54,7 @@ void limpaTela() {
 }
 
 void ImprimirSaidas(TipoApontador *lab, int linha, int coluna) {
-    printf("Posição atual:\n");
+    printf("Posicao atual:\n");
     printf("Linha: %d Coluna: %d\n", linha, coluna);
     printf("\n====== Labirinto ======\n\n");
 
